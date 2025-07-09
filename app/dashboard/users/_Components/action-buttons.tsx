@@ -46,7 +46,7 @@ export default function ActionButtons({ status, companyDetails }: ActionButtonsP
 
       <ConfirmationAlert
         title="Are you sure!"
-        description="You want to Delete?"
+        description="Do you want to delete?"
         cancelText="Cancel"
         confirmText="Delete"
         onConfirm={() => console.log('User Deleted')}
