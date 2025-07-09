@@ -46,7 +46,7 @@ const Page = () => {
     return (
         <div>
             <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-bold my-8">Subscription Earning</h1>
+                <h1 className="text-2xl font-bold my-8">Subscription Plans</h1>
                 <div className="flex items-center space-x-2">
                     <div className="relative">
                         <AddSubscription form={form} handleChange={handleChange} handleSave={handleSave} />
