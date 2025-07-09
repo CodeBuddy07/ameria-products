@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Settings2 } from "lucide-react"
+import { Search, Settings2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import UserTable from "./user-table"
@@ -201,7 +201,7 @@ export default function UserList() {
                 size="sm"
                 className="absolute right-0 top-1/2 -translate-y-1/2 h-9 w-10 p-0 bg-[#08692C] hover:bg-green-700 rounded-s-none"
               >
-                <Settings2 className="h-4 w-4" />
+                <Search className="h-4 w-4" />
               </Button>
             </div>
           </div>
