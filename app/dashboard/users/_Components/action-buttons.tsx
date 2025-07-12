@@ -15,7 +15,7 @@ interface ActionButtonsProps {
   }
 }
 
-export default function ActionButtons({ status, companyDetails }: ActionButtonsProps) {
+export default function ActionButtons({  status, companyDetails }: ActionButtonsProps) {
   const handleEdit = () => {
     console.log("Edit user")
   }
@@ -30,7 +30,6 @@ export default function ActionButtons({ status, companyDetails }: ActionButtonsP
 
   return (
     <div className="flex items-center space-x-2">
-
       <DetailsModal title="Company Details" companyDetails={companyDetails}>
         <Button
           variant="ghost"
@@ -42,14 +41,12 @@ export default function ActionButtons({ status, companyDetails }: ActionButtonsP
         </Button>
       </DetailsModal>
 
-
-
       <ConfirmationAlert
         title="Are you sure!"
-        description="Do you want to delete?"
+        description={`Do you want to ${status === "Active" ? "block" : "unblock"}?`}
         cancelText="Cancel"
-        confirmText="Delete"
-        onConfirm={() => console.log('User Deleted')}
+        confirmText={status === "Active" ? "Block" : "Unblock"}
+        onConfirm={() => console.log(`User ${status === "Active" ? "blocked" : "unblocked"}`)}
         variant="destructive"
       >
         {status === "Active" ? (

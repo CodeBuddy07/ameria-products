@@ -21,7 +21,6 @@ const Page = () => {
         price: "35.00",
     });
 
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));

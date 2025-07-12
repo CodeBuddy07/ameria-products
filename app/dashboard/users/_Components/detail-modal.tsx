@@ -21,7 +21,6 @@ interface DetailsModalProps {
 export const DetailsModal: React.FC<DetailsModalProps> = (
     { title, companyDetails, children } : DetailsModalProps
 ) => {
-    
     return (
         <Dialog>
             <DialogTrigger asChild>

@@ -1,12 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { Search, Settings2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import UserTable from "./user-table"
-import Pagination from "./pagination"
-
+import { useState } from "react";
+import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import UserTable from "./user-table";
+import Pagination from "./pagination";
 
 const mockUsers = [
   {
