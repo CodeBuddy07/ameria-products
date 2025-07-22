@@ -82,7 +82,7 @@ export function Sidebar({ className }: SidebarProps) {
                         <div className="h-16 w-24">
                             <Image
                                 src="/logo.png"
-                                alt="Redline Track Logo"
+                                alt="Readiness Track Logo"
                                 width={96}
                                 height={64}
                                 className="h-full w-full object-contain"

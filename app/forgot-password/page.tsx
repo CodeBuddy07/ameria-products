@@ -39,7 +39,7 @@ export default function ForgotPasswordPage() {
                         <div className="">
                             <Image
                                 src="/logo.png"
-                                alt="Redline Track Logo"
+                                alt="Readiness Track Logo"
                                 width={128}
                                 height={85}
                             />
