@@ -7,22 +7,35 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import logo from '@/public/logo.png';
 import { toast } from "sonner";
+import { log } from "console";
+import baseURL from "../utils/baseURL";
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-   
 
-    const handleLogin = (e: React.FormEvent) => {
+
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+
         if (!email || !password) return;
 
-        console.log("Email:", email);
-        console.log("Password:", password);
+        try {
+            const { data } = await baseURL.post('/auth/login', {
+                data: {
+                    email,
+                    password
+                }
+            })
+            
+            localStorage.setItem("accessToken", data?.data?.accessToken)
 
-        toast.success("Signed in successfully");
-        window.location.href = "/dashboard";
+            toast.success("Signed in successfully");
+            window.location.href = "/dashboard";
+        } catch (err: any) {
+            toast.error(err.message)
+        }
     };
 
     return (

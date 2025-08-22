@@ -10,7 +10,7 @@ import { useState } from "react"
 
 type User = {
   id: string
-  name: string
+  userName: string
   joinDate: string
   status: "Active" | "Blocked"
   company: {
@@ -77,17 +77,17 @@ export default function UserTable({ users }: UserTableProps) {
         <tbody className="divide-y divide-gray-200">
           {filteredUsers.map((user, index) => (
             <tr
-              key={`${user.id}-${index}`}
+              key={`${user?.id}-${index}`}
               className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
             >
-              <td className="px-6 py-4 text-sm text-gray-900">{user.id}</td>
-              <td className="px-6 py-4 text-sm text-gray-900">{user.name}</td>
-              <td className="px-6 py-4 text-sm text-gray-900">{user.joinDate}</td>
+              <td className="px-6 py-4 text-sm text-gray-900">{user?.id}</td>
+              <td className="px-6 py-4 text-sm text-gray-900">{user?.userName}</td>
+              <td className="px-6 py-4 text-sm text-gray-900">{user?.joinDate}</td>
               <td className="px-6 py-4">
-                <StatusBadge status={user.status} />
+                <StatusBadge status={user?.status} />
               </td>
               <td className="px-6 py-4">
-                <ActionButtons companyDetails={user.company} status={user.status} />
+                <ActionButtons companyDetails={user?.company} status={user?.status} />
               </td>
             </tr>
           ))}

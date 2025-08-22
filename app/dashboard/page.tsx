@@ -11,72 +11,55 @@ import { useEffect, useState } from "react"
 import { DetailsPopUp } from "./_components/actions/detailspopup"
 import { ConfirmationAlert } from "./users/_Components/confirmation-alert"
 import { toast } from "sonner"
+import baseURL from "../utils/baseURL"
 
+interface User {
+    userName: string;
+    id: string;
+    createdAt: string;
+    status: "Block" | "Active";
+}
 
-const users = [
-    {
-        id: "#5089",
-        name: "Jane Cooper",
-        date: "May 10, 2025",
-        status: "Active",
-        email: "jane@example.com",
-        subscriptionPlan: "Pro",
-    },
-    {
-        id: "#5090",
-        name: "Robert Fox",
-        date: "June 2, 2025",
-        status: "Blocked",
-        email: "robert.fox@example.com",
-        subscriptionPlan: "Basic",
-    },
-    {
-        id: "#5091",
-        name: "Emily Stone",
-        date: "April 18, 2025",
-        status: "Active",
-        email: "emily.stone@example.com",
-        subscriptionPlan: "Enterprise",
-    },
-    {
-        id: "#5092",
-        name: "Daniel Lee",
-        date: "March 27, 2025",
-        status: "Active",
-        email: "daniel.lee@example.com",
-        subscriptionPlan: "Pro",
-    },
-    {
-        id: "#5093",
-        name: "Sophia Turner",
-        date: "July 1, 2025",
-        status: "Blocked",
-        email: "sophia.turner@example.com",
-
-        subscriptionPlan: "Free",
-    },
-];
 
 export default function DashboardPage() {
-    const [filter, setFilter] = useState("all")
-    const [filteredUsers, setFilteredUsers] = useState(users)
+    const [filter, setFilter] = useState("all");
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
     const handleDelete = () => {
         console.log("Delete user")
         toast.success("User blocked successfully!")
-    }
+    };
 
     const handleBlock = () => {
         console.log("Block/Unblock user")
         toast.success("User unblocked successfully!")
-    }
+    };
+
+    const fetchUsers = async () => {
+        try {
+            const res = await baseURL.get('/user?limit=5', { withCredentials: true });
+
+            setFilteredUsers(res.data.data.user);
+            
+            return res.data.data.user;
+        } catch (err: any) {
+            console.error("Fetch users error:", err.message);
+            return null;
+        }
+    };
 
     useEffect(() => {
-        if (filter === "all") {
-            setFilteredUsers(users)
-        } else {
-            setFilteredUsers(users.filter(user => user.status.toLowerCase() === filter))
-        }
+        fetchUsers()
+    }, []);
+
+    useEffect(() => {
+        // TODO: WHEN BACKEND ADD STATUS SHOULD DO THE FILTERING
+
+        // if (filter === "all") {
+        //     setFilteredUsers(users)
+        // } else {
+        //     setFilteredUsers(users.filter(user => user.status.toLowerCase() === filter))
+        // }
     }, [filter]);
 
     return (
@@ -88,7 +71,7 @@ export default function DashboardPage() {
                     <CardContent className="flex items-start justify-between  space-y-2">
                         <div>
                             <p className="text-md text-muted-foreground font-medium">Total User</p>
-                            <h2 className="text-[28px] font-bold">68</h2>
+                            <h2 className="text-[28px] font-bold">{filteredUsers.length}</h2>
                         </div>
 
                         <div className="flex items-center justify-center bg-[#8280ff65] p-2 rounded-3xl h-[60px] w-[60px]">
@@ -159,8 +142,8 @@ export default function DashboardPage() {
                                 {filteredUsers.map((user, idx) => (
                                     <TableRow key={idx}>
                                         <TableCell>{user.id}</TableCell>
-                                        <TableCell className="font-medium">{user.name}</TableCell>
-                                        <TableCell>{user.date}</TableCell>
+                                        <TableCell className="font-medium">{user.userName}</TableCell>
+                                        <TableCell>{user.createdAt}</TableCell>
                                         <TableCell>
                                             <Badge
                                                 variant="outline"
